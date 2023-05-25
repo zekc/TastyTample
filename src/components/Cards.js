@@ -26,7 +26,7 @@ function Cards() {
             <CardItem
               src='images/img-3.jpg'
               text='Mombar makes you dizzy, I made it with my mother-in-law'
-              label='Eygept'
+              label='Eygpt'
               path='/services'
             />
             <CardItem

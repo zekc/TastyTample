@@ -12,7 +12,7 @@ function Cards() {
             <CardItem
               src='images/img-9.jpg'
               text='Stuffed with Alexandrian cromb'
-              label='ُEygept'
+              label='ُEygpt'
               path='/services'
             />
             <CardItem
@@ -32,7 +32,7 @@ function Cards() {
             <CardItem
               src='images/img-4.jpg'
               text='delicious kushari with um-oabic'
-              label='Eygept traditional dish'
+              label='Eygpt traditional dish'
               path='/products'
             />
             <CardItem

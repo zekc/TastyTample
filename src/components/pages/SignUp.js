@@ -81,7 +81,7 @@ const[loginPassword,setLoginPassword] = React.useState("");
     const [signIn, toggle] = React.useState(true);
      return(
 
-
+        <div className='signup'>
      
          <Components.Container> <div className='login'>
 
@@ -132,6 +132,7 @@ const[loginPassword,setLoginPassword] = React.useState("");
              </Components.OverlayContainer>
              </div>
          </Components.Container>
+         </div>
      )
 }
 

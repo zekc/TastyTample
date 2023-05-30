@@ -3,10 +3,18 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import {initializeApp} from 'firebase/app'
 import {
-    getFirestore, collection, getDocs,
-  addDoc, deleteDoc, doc
+    getFirestore, collection, onSnapshot,
+  addDoc, deleteDoc, doc,
+  query, where,
+  orderBy, serverTimestamp,
+  getDocs,
     
 }from 'firebase/firestore'
+import{
+
+    getAuth,
+    createUserWithEmailAndPassword,
+}    from 'firebase/auth'
 
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -20,10 +28,13 @@ const firebaseConfig = {
     measurementId: "G-XECJ1DWYHG"
   };
 
-  initializeApp(firebaseConfig)
+  const app =initializeApp(firebaseConfig)
+
+
 
   const db = getFirestore()
-
+ 
+export const auth = getAuth(app);
   // collection ref
 const colRef = collection(db, 'Recipe')
 
@@ -40,6 +51,9 @@ getDocs(colRef)
   .catch(err => {
     console.log(err.message)
   })
+
+
+
 
 // adding docs
 /* const addBookForm = document.querySelector('.add')
@@ -69,5 +83,7 @@ deleteBookForm.addEventListener('submit', (e) => {
 })
 
 */
+
+
 
 ReactDOM.render(<App />, document.getElementById('root'));

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '../Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import { getAuth } from 'firebase/auth';
+
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -24,6 +26,8 @@ function Navbar() {
 
   window.addEventListener('resize', showButton);
 
+
+  const auth = getAuth()
   return (
     <>
       <nav className='navbar'>
@@ -49,6 +53,16 @@ function Navbar() {
               >
                 Profile
               </Link>
+            </li>
+           <li className='nav-item'>
+              <Link
+               
+                className='nav-links'
+              
+              >
+               {auth.currentUser?.email}
+              </Link>
+            
             </li>
             <li className='nav-item'>
             </li>

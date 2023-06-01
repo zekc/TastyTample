@@ -6,7 +6,7 @@ import Home from './components/pages/Home';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import SignUp from './components/pages/SignUp';
-import Profile from './components/pages/profile';
+import Profile from './components/pages/Profile';
 import OtherProfile from './components/pages/otherprofile';
 
 import Dish from './components/pages/dish';
@@ -30,7 +30,7 @@ function App() {
         <Routes>
           
           <Route exact path='/'  element={<Home/>} />
-          <Route exact path='/profile' element={<Profile/>} />
+          <Route exact path='/Profile' element={<Profile/>} />
           <Route exact path='/otherprofile' element={<OtherProfile/>} />
 
           <Route exact path='/dish' element={<Dish/>} />

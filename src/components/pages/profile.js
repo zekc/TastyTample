@@ -3,12 +3,16 @@ import CardItem from '../CardItemEditable/CardItemEditOp';
 import CardItem2 from '../CardItem/index';
 
 import { Link } from 'react-router-dom';
+import { auth } from '../..';
+import {Routes, Route, useNavigate} from 'react-router-dom';
 
 
-function profile() {
 
 
-    
+function Profile() {
+
+    const navigate = useNavigate();
+    if(auth.currentUser){
   return (
     <div class="bg-blue-50 profilexx">
 
@@ -220,7 +224,10 @@ function profile() {
     </div>
 
 </div>
-  );
+  );}else{
+   
+   
+  }
 }
 
-export default profile;
+export default Profile;

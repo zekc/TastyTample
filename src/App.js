@@ -6,7 +6,7 @@ import Home from './components/pages/Home';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import SignUp from './components/pages/SignUp';
-import Profile from './components/pages/Profile';
+import Profile from './components/pages/profile';
 import OtherProfile from './components/pages/otherprofile';
 
 import Dish from './components/pages/dish';

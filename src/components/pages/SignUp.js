@@ -1,7 +1,7 @@
-import React from 'react';
-
+import React, { useEffect, useRef, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import * as Components from './Componentslogin';
-
+import { useAuth } from '../../context/AuthContext'
 import "./styleslogin.css";
 import { createUserWithEmailAndPassword,
     getAuth,
@@ -13,14 +13,40 @@ from 'firebase/auth';
 
 
 function SignUp() {
-
+    const emailRef = useRef()
+    const passwordRef = useRef()
 
 const auth = getAuth();
+const navigate = useNavigate()
+const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
+const { login, currentUser } = useAuth()
 
 const[registerEmail,setRegisterEmail] = React.useState("");
 const[registerPassword,setRegisterPassword] = React.useState("");
-const[loginEmail,setLoginEmail] = React.useState("");
-const[loginPassword,setLoginPassword] = React.useState("");
+
+
+useEffect(() => {
+    if(currentUser) {
+        navigate('/')
+    }
+}, [])
+
+async function handleSubmit(e) {
+    e.preventDefault();
+
+    try {
+        setError("")
+        setLoading(true)
+        await login(emailRef.current.value, passwordRef.current.value)
+        navigate("/")
+    } catch(e) {
+        console.log(e)
+        setError("Failed to sign in")
+    }
+
+    setLoading(false)
+}
 
 
     const register = async () => {
@@ -45,33 +71,6 @@ const[loginPassword,setLoginPassword] = React.useState("");
 
    
    
-            const login = async () => {
-
-              
-                
-                try {
-                    const  user = await signInWithEmailAndPassword (
-                    auth,
-                    loginEmail,
-                    loginPassword
-        
-                    ).then((userCredential) => {
-                        // Signed in 
-                        const user = userCredential.user;
-                        // ...
-                      })
-                      .catch((error) => {
-                        const errorCode = error.code;
-                        const errorMessage = error.message;
-                      });
-                        console.log(user);
-                }catch(error){
-        
-                    console.log(error.message);
-                }
-                
-        
-            };
             
         
     const logout = async () => {};
@@ -98,10 +97,10 @@ const[loginPassword,setLoginPassword] = React.useState("");
              <Components.SignInContainer signinIn={signIn}>
                   <Components.Form>
                       <Components.Title>Sign in</Components.Title>
-                      <Components.Input  type='email' placeholder='Email' onChange={(event) => {setLoginEmail(event.target.value)}}/>
-                      <Components.Input  type='password' placeholder='Password' onChange={(event) => {setLoginPassword(event.target.value)}} />
+                      <Components.Input  type='email' placeholder='Email'  ref={emailRef}/>
+                      <Components.Input  type='password' placeholder='Password' ref={passwordRef} />
                       <Components.Anchor href='#'>Forgot your password?</Components.Anchor>
-                      <Components.Button  onClick={login} >Sigin In</Components.Button>
+                      <Components.Button  onClick={handleSubmit} >Sigin In</Components.Button>
                   </Components.Form>
              </Components.SignInContainer>
 

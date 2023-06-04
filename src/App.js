@@ -17,7 +17,7 @@ import Footer from './components/Footer';
 import EditProfile from './components/pages/editProfile';
 import Following from './components/followings/DataArea';
 import Follower from './components/followers/DataArea';
-
+import ProtectedRoute from './ProtectedRoute';
 
 
 
@@ -30,7 +30,9 @@ function App() {
         <Routes>
           
           <Route exact path='/'  element={<Home/>} />
+          <Route element={<ProtectedRoute />}>
           <Route exact path='/Profile' element={<Profile/>} />
+          </Route>
           <Route exact path='/otherprofile' element={<OtherProfile/>} />
 
           <Route exact path='/dish' element={<Dish/>} />

@@ -3,7 +3,7 @@ import { Button } from '../Button';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { getAuth } from 'firebase/auth';
-
+import { useAuth } from '../../context/AuthContext'
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -11,6 +11,8 @@ function Navbar() {
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+
+
 
   const showButton = () => {
     if (window.innerWidth <= 960) {
@@ -28,7 +30,7 @@ function Navbar() {
 
 
   const auth = getAuth()
-  if(auth.currentUser){
+  if(true ){
 
     return (
       <>

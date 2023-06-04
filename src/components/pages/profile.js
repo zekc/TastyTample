@@ -1,6 +1,8 @@
-import React from 'react';
+
+import React, { useState } from 'react'
 import CardItem from '../CardItemEditable/CardItemEditOp';
 import CardItem2 from '../CardItem/index';
+import { useAuth } from '../../context/AuthContext'
 
 import { Link } from 'react-router-dom';
 import { auth } from '../..';
@@ -11,7 +13,23 @@ import {Routes, Route, useNavigate} from 'react-router-dom';
 
 function Profile() {
 
+    const [error, setError] = useState()
+    const { currentUser, logout } = useAuth()
+    
     const navigate = useNavigate();
+    async function handleLogout() {
+        setError("")
+
+        try {
+            await logout()
+            navigate("/loginAdmin")
+        } catch (e) {
+            console.error(e)
+            setError("Failed to log out")
+        }
+    }
+
+ 
     if(auth.currentUser){
   return (
     <div className="bg-blue-50 profilexx">

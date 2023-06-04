@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { AuthProvider } from './context/AuthContext'
 import {initializeApp} from 'firebase/app'
 import {
     getFirestore, collection, onSnapshot,
@@ -13,7 +14,8 @@ import {
 import{
 
     getAuth,
-    createUserWithEmailAndPassword,
+    createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged 
+    
 }    from 'firebase/auth'
 
 
@@ -35,6 +37,13 @@ const firebaseConfig = {
   const db = getFirestore()
  
 export const auth = getAuth(app);
+export const methods = {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+}
+
   // collection ref
 const colRef = collection(db, 'Recipe')
 
@@ -51,6 +60,7 @@ getDocs(colRef)
   .catch(err => {
     console.log(err.message)
   })
+  
 
 
 
@@ -86,4 +96,11 @@ deleteBookForm.addEventListener('submit', (e) => {
 
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </React.StrictMode>
+);

@@ -22,7 +22,7 @@ function Profile() {
 
         try {
             await logout()
-            navigate("/loginAdmin")
+            navigate("/")
         } catch (e) {
             console.error(e)
             setError("Failed to log out")
@@ -61,7 +61,7 @@ function Profile() {
                         </li>
                     </ul>
                     <div className="flex mx-auto justify-center flex-wrap gap-6 mt-2">
-                        <button id="self-logout" onClick="handleLogout()" type="button" className="bg-blue-600 hover:bg-blue-700 text-white text-base font-regular py-2 px-4 rounded">
+                        <button id="self-logout" onClick={handleLogout} type="button" className="bg-blue-600 hover:bg-blue-700 text-white text-base font-regular py-2 px-4 rounded">
                           Logout
                         </button>
                       </div>

@@ -16,11 +16,15 @@ function SignUp() {
     const emailRef = useRef()
     const passwordRef = useRef()
 
+    const emailRefReg = useRef()
+    const passwordRefReg = useRef()
+
 const auth = getAuth();
 const navigate = useNavigate()
 const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
 const { login, currentUser } = useAuth()
+const { signup, currentUserReg } = useAuth()
 
 const[registerEmail,setRegisterEmail] = React.useState("");
 const[registerPassword,setRegisterPassword] = React.useState("");
@@ -47,6 +51,23 @@ async function handleSubmit(e) {
 
     setLoading(false)
 }
+async function handleSubmitRegister(e) {
+    e.preventDefault();
+
+   
+
+    try {
+        setError("")
+        setLoading(true)
+        await signup(emailRefReg.current.value, passwordRefReg.current.value)
+        navigate("/loginAdmin")
+    } catch(e) {
+        console.log(e)
+        setError("Failed to create an account")
+    }
+
+    setLoading(false)
+}
 
 
     const register = async () => {
@@ -55,7 +76,6 @@ async function handleSubmit(e) {
         try {
             const  user = await createUserWithEmailAndPassword(
             auth,
-            
             registerEmail,
             registerPassword
 
@@ -88,9 +108,9 @@ async function handleSubmit(e) {
                  <Components.Form>
                      <Components.Title>Create Account</Components.Title>
                      <Components.Input type='text' placeholder='Name' />
-                     <Components.Input  type='email' placeholder='Email' name="email" onChange={(event) => {setRegisterEmail(event.target.value)}}/>
-                     <Components.Input type='password' placeholder='Password' name="password" onChange={(event) => {setRegisterPassword(event.target.value)}}/>
-                     <Components.Button onClick={register} name='submit' >Sign Up</Components.Button>  
+                     <Components.Input  type='email' placeholder='Email' name="email" ref={emailRefReg}/>
+                     <Components.Input type='password' placeholder='Password' name="password" ref={passwordRefReg}/>
+                     <Components.Button onClick={handleSubmitRegister} name='submit' >Sign Up</Components.Button>  
                  </Components.Form>
              </Components.SignUpContainer>
 

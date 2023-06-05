@@ -1,11 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '../Button';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import './Navbar.css';
 import { getAuth } from 'firebase/auth';
 import { useAuth } from '../../context/AuthContext'
-
+import { auth } from '../..';
 function Navbar() {
+
+  const [error, setError] = useState()
+  const { currentUser, logout } = useAuth()
+  const [profile, setProfile] = useState(null);
+
+  const navigate = useNavigate();
+  async function handleLogout() {
+      setError("")
+
+      try {
+          await logout()
+          navigate("/")
+      } catch (e) {
+          console.error(e)
+          setError("Failed to log out")
+      }
+  }
+
+
+
+
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -29,8 +50,7 @@ function Navbar() {
   window.addEventListener('resize', showButton);
 
 
-  const auth = getAuth()
-  if(true ){
+  if(auth.currentUser ){
 
     return (
       <>
@@ -68,13 +88,13 @@ function Navbar() {
                 <Link
                   to='/sign-up'
                   className='nav-links-mobile'
-                  onClick={closeMobileMenu}
+                  
                 >
-                  Sign Up
+                  
                 </Link>
               </li>
             </ul>
-            {button && <Button buttonStyle='btn--outline'>SIGN IN</Button>}
+            {button && <Button onClick={handleLogout} buttonStyle='btn--outline'>SIGN OUT</Button>}
           </div>
         </nav>
       </>

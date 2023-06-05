@@ -1,6 +1,6 @@
 /* eslint-disable react/style-prop-object */
 import React from 'react';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/index';
 import './App.css';
 import Home from './components/pages/Home';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';

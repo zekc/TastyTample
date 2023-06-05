@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CardItem from '../CardItemEditable/CardItemEditOp';
 import CardItem2 from '../CardItem/index';
 import { useAuth } from '../../context/AuthContext'
@@ -7,6 +7,7 @@ import { useAuth } from '../../context/AuthContext'
 import { Link } from 'react-router-dom';
 import { auth } from '../..';
 import {Routes, Route, useNavigate} from 'react-router-dom';
+import {getFirestore, query, collection, where, getDoc, doc, Timestamp} from 'firebase/firestore'
 
 
 
@@ -15,7 +16,8 @@ function Profile() {
 
     const [error, setError] = useState()
     const { currentUser, logout } = useAuth()
-    
+    const [profile, setProfile] = useState(null);
+
     const navigate = useNavigate();
     async function handleLogout() {
         setError("")
@@ -29,8 +31,23 @@ function Profile() {
         }
     }
 
+    useEffect(() => {
+        async function fetchProfile() {
+            const db = getFirestore();
+            const ref = doc(db, "Profile", currentUser.uid);
+            const profile = (await getDoc(ref)).data();
+            
+            setProfile(profile);
+        }
+
+        fetchProfile();
+    }, []);
+
+    if (profile)
+    console.log(profile.profilePicture);
+
  
-    if(auth.currentUser){
+    if(auth.currentUser && profile){
   return (
     <div className="bg-blue-50 profilexx">
 
@@ -43,11 +60,11 @@ function Profile() {
                 <div className="bg-white p-3 border-t-4 border-blue-600">
                     <div className="image overflow-hidden">
                         <img id="self-profile-image" className="h-auto w-full mx-auto"
-                            src="../assets/images/default-profile.jpeg"
+                            src={`https://firebasestorage.googleapis.com/v0/b/recepiesite.appspot.com/o/${currentUser.uid}.png?alt=media`}
                             alt=""/>
                     </div>
-                    <h1 id="self-name" className="text-gray-900 font-medium text-xl leading-8 my-1">Unknown</h1>
-                    <p id="self-caption" className="text-sm text-gray-500 hover:text-gray-600 leading-6 font-regular">No Caption</p>
+                    <h1 id="self-name" className="text-gray-900 font-medium text-xl leading-8 my-1">{profile.nick}</h1>
+                    <p id="self-caption" className="text-sm text-gray-500 hover:text-gray-600 leading-6 font-regular">{profile.caption}</p>
                     <ul
                         className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                         <li className="flex items-center py-3 font-regular">
@@ -57,7 +74,7 @@ function Profile() {
                         </li>
                         <li className="flex items-center py-3 font-regular">
                             <span>Member since</span>
-                            <span id="self-created-at" className="ml-auto">Nov 07, 2016</span>
+                            <span id="self-created-at" className="ml-auto">{profile.createdAt.toDate().toDateString()}</span>
                         </li>
                     </ul>
                     <div className="flex mx-auto justify-center flex-wrap gap-6 mt-2">
@@ -88,17 +105,17 @@ function Profile() {
                         <div className="grid md:grid-cols-2 text-sm">
                             <div className="grid grid-cols-2">
                                 <div className="px-4 py-2 font-medium">Full Name</div>
-                                <div id="self-about-name" className="px-4 py-2 font-regular">Unknown</div>
+                                <div id="self-about-name" className="px-4 py-2 font-regular">{profile.firstName + ' ' + profile.lastName}</div>
                             </div>
                             <div className="grid grid-cols-2">
                                 <div className="px-4 py-2 font-medium">Gender</div>
-                                <div id="self-about-gender" className="px-4 py-2 font-regular">Unknown</div>
+                                <div id="self-about-gender" className="px-4 py-2 font-regular">{profile.gender}</div>
                             </div>
                            
                             <div className="grid grid-cols-2">
                                 <div className="px-4 py-2 font-medium">Email</div>
                                 <div className="px-4 py-2 font-regular">
-                                    <a id="self-about-email" className="text-blue-600" href="mailto:jane@example.com">Unknown</a>
+                                    <a id="self-about-email" className="text-blue-600" href="mailto:jane@example.com">{currentUser.email}</a>
                                 </div>
                             </div>
 
@@ -111,7 +128,7 @@ function Profile() {
 
                             <Link to='/following'>
                             <div className="grid grid-cols-2">
-                                <div className="px-4 py-2 font-medium">Followings</div>
+                                <div className="px-4 py-2 font-medium">Following</div>
                                 <div id="self-about-location" className="px-4 py-2 font-regular">40k</div>
                             </div>
                             </Link>

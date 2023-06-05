@@ -9,10 +9,14 @@ signInWithEmailAndPassword
 }
 
 from 'firebase/auth';
+import { Timestamp, addDoc, collection, doc, getFirestore, setDoc } from 'firebase/firestore';
 
 
 
 function SignUp() {
+    const firstNameRefReg = useRef();
+    const lastNameRefReg = useRef();
+
     const emailRef = useRef()
     const passwordRef = useRef()
 
@@ -59,7 +63,17 @@ async function handleSubmitRegister(e) {
     try {
         setError("")
         setLoading(true)
-        await signup(emailRefReg.current.value, passwordRefReg.current.value)
+        const credentials = await signup(emailRefReg.current.value, passwordRefReg.current.value);
+        const db = getFirestore();
+        await setDoc(doc(db, 'Profile', credentials.user.uid), {
+            nick: '',
+            firstName: firstNameRefReg.current.value,
+            lastName: lastNameRefReg.current.value,
+            gender: 'Male',
+            caption: '',
+            createdAt: Timestamp.now()
+        });
+        
         navigate("/loginAdmin")
     } catch(e) {
         console.log(e)
@@ -107,7 +121,8 @@ async function handleSubmitRegister(e) {
              <Components.SignUpContainer class ="signup" signinIn={signIn}>
                  <Components.Form>
                      <Components.Title>Create Account</Components.Title>
-                     <Components.Input type='text' placeholder='Name' />
+                     <Components.Input type='text' placeholder='First Name' ref={firstNameRefReg} />
+                     <Components.Input type='text' placeholder='Last Name' ref={lastNameRefReg} />
                      <Components.Input  type='email' placeholder='Email' name="email" ref={emailRefReg}/>
                      <Components.Input type='password' placeholder='Password' name="password" ref={passwordRefReg}/>
                      <Components.Button onClick={handleSubmitRegister} name='submit' >Sign Up</Components.Button>  

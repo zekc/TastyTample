@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {getAuth} from 'firebase/auth'
+import {collection, query, where, getDoc, getFirestore} from 'firebase/firestore'
 
 import CardItem from '../CardItem';
 
-function otherprofile() {
+async function otherprofile() {
 
-
+    const auth = getAuth();
+    const db = getFirestore();
+    const query = query(collection(db, "Profile"), where("userId", "==", auth.currentUser.id));
+    const profile = (await getDoc(query)).data();
     
   return (
     <div className="bg-blue-50 profilexx">
@@ -20,7 +25,7 @@ function otherprofile() {
                             src="../assets/images/default-profile.jpeg"
                             alt=""/>
                     </div>
-                    <h1 id="other-name" className="text-gray-900 font-medium text-xl leading-8 my-1">Unknown</h1>
+                    <h1 id="other-name" className="text-gray-900 font-medium text-xl leading-8 my-1">{profile.nick}</h1>
                     <p id="other-caption" className="text-sm text-gray-500 hover:text-gray-600 leading-6 font-regular">No Caption</p>
                     <ul
                         className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">

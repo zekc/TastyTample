@@ -13,7 +13,6 @@ import Dish from './components/pages/dish';
 import CreateRecipe from './components/pages/createRecipe';
 import EditRecipe from './components/pages/editRecipe';
 
-import Footer from './components/Footer';
 import EditProfile from './components/pages/editProfile';
 import Following from './components/followings/DataArea';
 import Follower from './components/followers/DataArea';
@@ -50,7 +49,6 @@ function App() {
         </Routes>
        
 
-        <Footer />
       </Router>
       
     </>

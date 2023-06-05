@@ -14,6 +14,7 @@ import CreateRecipe from './components/pages/createRecipe';
 import EditRecipe from './components/pages/editRecipe';
 
 import EditProfile from './components/pages/editProfile';
+import SavedRecipes from './components/pages/SavedRecipes';
 import Following from './components/followings/DataArea';
 import Follower from './components/followers/DataArea';
 import ProtectedRoute from './ProtectedRoute';
@@ -43,6 +44,7 @@ function App() {
           <Route exact path='/editProfile' element={<EditProfile/>} />
           <Route exact path='/follower' element={<Follower/>} />
           <Route exact path='/following' element={<Following/>} />
+          <Route exact path='/savedRecipes' element={<SavedRecipes/>} />
 
 
 

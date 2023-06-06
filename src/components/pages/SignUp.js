@@ -74,7 +74,7 @@ async function handleSubmitRegister(e) {
             createdAt: Timestamp.now()
         });
         
-        navigate("/loginAdmin")
+        navigate("/")
     } catch(e) {
         console.log(e)
         setError("Failed to create an account")

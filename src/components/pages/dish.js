@@ -71,7 +71,7 @@ function dish() {
 				</video>
 
 				<div className="flex flex-row mt-8">
-				   <Link to='/OtherProfile'>
+				   <Link to='/otherProfile'>
 					<img alt='' id="dish-page-owner-image" className="w-14 md:w-20 h-14 md:h-20 mr-2 object-cover rounded-full cursor-pointer" src="../assets/images/default-profile.jpeg"/>
 					
 					<div className="w-8/12 md:w-10/12 ml-2">

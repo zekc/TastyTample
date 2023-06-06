@@ -48,7 +48,7 @@ function Profile() {
  
     if(auth.currentUser && profile){
   return (
-    <div className="bg-blue-50 profilexx">
+    <div className="bg-blue-50 ">
 
 
     <div className="container mx-auto my-5 p-5">

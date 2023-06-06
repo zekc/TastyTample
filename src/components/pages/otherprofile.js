@@ -12,7 +12,7 @@ async function otherprofile() {
     const profile = (await getDoc(query)).data();
     
   return (
-    <div className="bg-blue-50 profilexx">
+    <div className="bg-blue-50">
         
     <div className="container mx-auto my-5 p-5">
         <div className="md:flex no-wrap md:-mx-2">

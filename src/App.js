@@ -33,7 +33,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
           <Route exact path='/Profile' element={<Profile/>} />
           </Route>
-          <Route exact path='/otherprofile' element={<OtherProfile/>} />
+          <Route exact path='/otherProfile' element={<OtherProfile/>} />
 
           <Route exact path='/dish' element={<Dish/>} />
           <Route exact path='/createRecipe' element={<CreateRecipe/>} />

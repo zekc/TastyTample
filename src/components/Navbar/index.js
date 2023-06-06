@@ -107,7 +107,7 @@ function Navbar() {
         <nav className='navbar'>
           <div className='navbar-container'>
             <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-              TT
+            <img alt='' className="w-14 md:w-20 h-14 md:h-20 mr-2 object-cover rounded-full cursor-pointer" src="../logo512.png"/>
               <i className='fab fa-typo3' />
             </Link>
             <div className='menu-icon' onClick={handleClick}>

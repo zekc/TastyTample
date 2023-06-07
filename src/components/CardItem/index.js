@@ -13,7 +13,7 @@ function CardItem(props) {
                                     <img  className="w-full h-64 object-cover cursor-pointer" src={props.src} alt="img-1"/>
                                     <div className="px-6 py-4">
                                         <div className="font-medium text-xl mb-2 overflow-ellipsis overflow-hidden whitespace-nowrap cursor-pointer">
-                                            dish name
+                                        {props.dishName}
                                         </div>
                                         <p className="font-regular text-gray-600 text-base leading-normal h-12 overflow-ellipsis overflow-hidden w-full">{props.text}</p>
                                         

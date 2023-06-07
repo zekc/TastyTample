@@ -99,14 +99,8 @@ async function handleSubmitRegister(e) {
 
             console.log(error.message);
         }
-     
 
     };
-
-   
-   
-            
-        
     const logout = async () => {};
 
 
@@ -155,7 +149,7 @@ async function handleSubmitRegister(e) {
                      <Components.RightOverlayPanel signinIn={signIn}>
                        <Components.Title>Tasty Temple</Components.Title>
                        <Components.Paragraph>
-                           Sign up now and share your best recipes with other people  
+                           Sign up now and share your best recipes with other people
                        </Components.Paragraph>
                            <Components.GhostButton onClick={() => toggle(false)}>
                                Sign Up

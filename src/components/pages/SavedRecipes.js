@@ -36,7 +36,7 @@ function Profile() {
             const db = getFirestore();
             const ref = doc(db, "Profile", currentUser.uid);
             const profile = (await getDoc(ref)).data();
-            
+
             setProfile(profile);
         }
 
@@ -46,7 +46,7 @@ function Profile() {
     if (profile)
     console.log(profile.profilePicture);
 
- 
+
     if(auth.currentUser && profile){
   return (
     <div className="bg-blue-50 profilexx">
@@ -54,12 +54,9 @@ function Profile() {
 
     <div className="container mx-auto my-5 p-5">
         <div className="md:flex no-wrap md:-mx-2">
-            
-              
 
-                
                 {/* <!-- End of profile tab --> */}
-         
+
             <div className="my-4"></div>
 
                 {/* <!--saved posts--> */}
@@ -75,47 +72,40 @@ function Profile() {
                                     </svg>
                                 </span>
                                 <span className="tracking-wide text-blue-600 ml-2 font-bold">Saved Posts</span>
-                                
+
                             </div>
-                            <div id="self-posts" className="grid grid-cols-1 md:grid-cols-3 gap-3">  
+                            <div id="self-posts" className="grid grid-cols-1 md:grid-cols-3 gap-3">
                             <CardItem2
-                              src='images/img-8.jpg'
-                              text='Stuffed with Alexandrian cromb'
-                              label='Egypt'
-                              path='/dish'
+                              src='images/Brocoli.jpg'
+                              dishName='Roasted Brocoli'
+                              text='Roasted broccoli is easy to make and so much more flavorsome than boiled. My favorite part is the roasted sliced stem pieces.'
+                              label='Healthy'
+                              path='/dishBrocoli'
                             />
                             <CardItem2
-                              src='images/img-8.jpg'
-                              text='Stuffed with Alexandrian cromb'
-                              label='Egypt'
-                              path='/dish'
+                              src='images/Italian Chicken Marinade.jpg'
+                              dishName='Italian Chicken Marinade'
+                              text='This Italian dressing chicken marinade is a super simple but delicious way to add flavor before grilling.'
+                              label='Lunch'
+                              path='/dishItalianChicken'
                             />
-                            <CardItem2
-                              src='images/img-8.jpg'
-                              text='Stuffed with Alexandrian cromb'
-                              label='Egypt'
-                              path='/dish'
-                            />
-                           
+
                             </div>
                         </div>
-                        
+
                     </div>
                     {/* <!-- End of saved posts grid --> */}
-                
-                
-                
+
                 </div>
-                
+
                 {/* <!-- End of profile tab --> */}
-            
+
         </div>
     </div>
 
 </div>
   );}else{
-   
-   
+
   }
 }
 

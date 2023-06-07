@@ -1,9 +1,31 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './Cards.css';
 import CardItem from '../CardItem/index';
+import { collection, getDocs, getFirestore } from "firebase/firestore"; 
 
 
 function Cards() {
+
+  const [str1, setStr1] = useState();
+	const [recipeInfo, setRecipeInfo] = useState();
+
+	useEffect(() => {
+		async function fetchProfile() {
+			const db = getFirestore();
+
+			const querySnapshot = await getDocs(collection(db, "Recipe"));
+			//TO-DO yeni tarif eklenince filtrele :)
+			querySnapshot.forEach((doc) => {
+			  console.log("hakan ", doc.data());
+			  setRecipeInfo(doc.data());
+        setStr1()
+			});
+		}
+    
+		fetchProfile();
+	  }, []);
+
+    console.log("kaan", recipeInfo);
   return (
     <div className='cards'>
       <h1>Check out these EPIC Destinations!</h1>
@@ -11,15 +33,17 @@ function Cards() {
         <div className='cards__wrapper'>
           <ul className='cards__items'>
             <CardItem
-              src='images/img-9.jpg'
-              text='Stuffed with Alexandrian cromb'
-              label='Egypt'
-              path='/dish'
+              src={recipeInfo?.image_url}
+              prepTime={recipeInfo?.time}
+              text={recipeInfo?.title}
+              label={recipeInfo?.label}
+              path='dish'
             />
             <CardItem
-              src='images/img-2.jpg'
-              text='Hawawshi that is better than Hawawshi of um-Khaled'
-              label='Unhealthy'
+              src={recipeInfo?.image_url}
+              prepTime={recipeInfo?.time}
+              text={recipeInfo?.title}
+              label={recipeInfo?.label}
               path='/dish'
             />
           </ul>

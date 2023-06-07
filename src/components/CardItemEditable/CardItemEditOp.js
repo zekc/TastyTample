@@ -14,10 +14,10 @@ function CardItemEditOp(props) {
                                     <div className="px-6 py-4">
                                     <Link to={props.path}>
                                         <div className="font-medium text-xl mb-2 overflow-ellipsis overflow-hidden whitespace-nowrap cursor-pointer">
-                                            dish name
+                                            {props.text}
                                         </div>
                                         </Link>
-                                        <p className="font-regular text-gray-600 text-base leading-normal h-12 overflow-ellipsis overflow-hidden w-full">{props.text}</p>
+                                        <p className="font-regular text-gray-600 text-base leading-normal h-12 overflow-ellipsis overflow-hidden w-full">{props.prepTime}</p>
                                         
                                     </div>
                                     <div className="px-6 pb-2 flex flex-row">

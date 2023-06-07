@@ -1,8 +1,29 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
+import { collection, getDocs, getFirestore } from "firebase/firestore"; 
 
 
-function dish() {
+
+function Dish() {
+
+	const [recipeInfo, setRecipeInfo] = useState();
+
+	useEffect(() => {
+		async function fetchProfile() {
+			const db = getFirestore();
+
+			const querySnapshot = await getDocs(collection(db, "Recipe"));
+			//TO-DO yeni tarif eklenince filtrele :)
+			querySnapshot.forEach((doc) => {
+			  console.log("mahmut ", doc.data());
+			  setRecipeInfo(doc.data());
+			});
+		}
+	
+		fetchProfile();
+	  }, []);
+
+	
 
   return (
     <div className="bg-blue-50 overflow-x-hidden">
@@ -14,29 +35,19 @@ function dish() {
 		<div className="flex pt-5 md:pt-12 justify-center">
 			<div className="bg-white md:h-96 w-11/12 md:w-7/10 md:mx-8 md:flex md:max-w-5xl shadow-lg rounded-lg">
 				<div className="md:w-1/2 h-64 rounded-t-lg md:rounded-t-none md:rounded-tl-lg md:rounded-bl-lg md:h-auto overflow-hidden">
-					<img alt='' id="dish-page-image" className="object-cover" src="../images/img-4.jpg" />
+					<img alt='' id="dish-page-image" className="object-cover" src={recipeInfo?.image_url} />
 					{/* <!-- <div className="h-64 bg-cover lg:rounded-lg lg:h-full" style="background-image:url(butterChicken.jpeg)"></div> --> */}
 				</div>
 				<div className="mb-4 pt-5 px-6 max-w-xl md:max-w-5xl md:w-1/2 specialfordish" >
-					<h2 id="dish-page-name" className="text-3xl font-medium text-blue-600">Butter Chicken</h2>
+					<h2 id="dish-page-name" className="text-3xl font-medium text-blue-600">{recipeInfo?.title}</h2>
 					<span id="dish-page-prep-time" className="bg-green-400 text-gray-50 text-sm font-light rounded-md px-2 py-1">30 min</span>
 					<span id="dish-page-cuisine-type" className="bg-green-400 text-gray-50 text-sm font-light rounded-md px-2 py-1">Indian</span>
 					<p id="dish-page-ingredients" className="mt-4 text-gray-600 text-base font-regular">
-						 <span><li className="text-base font-regular">1/2 cup Boiled Capsicum</li></span>
-						<span><li>Half kg boneless chicken</li></span>
-						<span><li>400gm chicken broth</li></span>
-						<span><li>half cut potatoes</li></span>
-						<span><li>Fine cut 2-3 onions and garlic</li></span>
-						<span><li>100gm Ginger garlic paste</li></span>
-						<span><li>¼ cup unsalted butter</li></span>
-						<span><li>¼ cup vegetable shortening</li></span>
-						<span><li>1 ¼ teaspoons ground cinnamon</li></span>
-						<span><li>1 cup golden raisins, optional</li></span>
-						<span><li>1 teaspoon cider or white vinegar*</li></span>
-						<span><li>½ teaspoon baking soda</li></span>
-						<span><li>1 large egg</li></span>
-						<span><li>¼ cup granulated sugar</li></span>
-						<span><li>⅛ teaspoon ground nutmeg</li></span> 
+						 
+						
+						 {recipeInfo?.ingredients.map(function(item){
+							return <span><li>{item}</li></span>
+						 })}
 					</p>
 				   
 				</div>
@@ -56,11 +67,7 @@ function dish() {
 					<span className="bg-green-400 text-gray-50 text-sm font-light rounded-md px-2 py-1">Instructions</span>
 					<span id="dish-page-video-present" className="hidden bg-green-400 text-gray-50 text-sm font-light rounded-md px-2 py-1 display-inline-block">Video</span>
 					 <p id="dish-page-direction-text" className="mt-4 font-regular text-base">
-						 Prepare the vinaigrette first. Whisk together the tomato paste, red wine vinegar, basil, garlic powder, sugar, salt, and pepper in a bowl until smooth. Begin to whisk in the olive oil, one tablespooon at a time, until fully incorporated. Set the vinaigrette aside.
-						 <br/><br/>
-						 Cook the rotini pasta according to the package directions (boil for 7-10 minutes, or until tender). Drain the pasta in a colander. Rinse briefly with cool water to cool off the pasta. Drain well.
-						 <br/><br/>
-						 Once the pasta has drained, transfer it to a large bowl. Add the chopped broccoli, red onion, and sunflower seeds. Crumble the feta over top. Drizzle the dressing into the bowl and then gently toss the ingredients until they are evenly combined and everything is coated in dressing. Serve immediately or refrigerate until ready to eat.
+						 {recipeInfo?.definition}
 					 </p>
 	{/* <!-- video section --> */}
 	
@@ -75,7 +82,7 @@ function dish() {
 					<img alt='' id="dish-page-owner-image" className="w-14 md:w-20 h-14 md:h-20 mr-2 object-cover rounded-full cursor-pointer" src="../assets/images/default-profile.jpeg"/>
 					
 					<div className="w-8/12 md:w-10/12 ml-2">
-						<h2 id="dish-page-owner-name" className="text-gray-800 text-lg font-medium mb-2 cursor-pointer">Ashutosh Hathidara</h2>
+						<h2 id="dish-page-owner-name" className="text-gray-800 text-lg font-medium mb-2 cursor-pointer">{recipeInfo?.username}</h2>
 					</div>
 					</Link>
 				</div>
@@ -145,4 +152,4 @@ function dish() {
   );
 }
 
-export default dish;
+export default Dish;

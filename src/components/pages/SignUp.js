@@ -129,7 +129,7 @@ async function handleSubmitRegister(e) {
                       <Components.Input  type='email' placeholder='Email'  ref={emailRef}/>
                       <Components.Input  type='password' placeholder='Password' ref={passwordRef} />
                       <Components.Anchor href='#'>Forgot your password?</Components.Anchor>
-                      <Components.Button  onClick={handleSubmit} >Sigin In</Components.Button>
+                      <Components.Button  onClick={handleSubmit} >Sign In</Components.Button>
                   </Components.Form>
              </Components.SignInContainer>
 

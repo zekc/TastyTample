@@ -110,7 +110,7 @@ function Profile() {
                                 <div className="px-4 py-2 font-medium">Gender</div>
                                 <div id="self-about-gender" className="px-4 py-2 font-regular">{profile.gender}</div>
                             </div>
-                           
+
                             <div className="grid grid-cols-2">
                                 <div className="px-4 py-2 font-medium">Email</div>
                                 <div className="px-4 py-2 font-regular">
@@ -120,7 +120,7 @@ function Profile() {
                             <Link to='/savedRecipes'>
                             <div className="grid grid-cols-2">
                                 <div className="px-4 py-2 font-medium">Saved Recipes</div>
-                                <div id="self-about-location" className="px-4 py-2 font-regular">5</div>
+                                <div id="self-about-location" className="px-4 py-2 font-regular">2</div>
                             </div>
                             </Link>
 
@@ -137,7 +137,7 @@ function Profile() {
                                 <div id="self-about-location" className="px-4 py-2 font-regular">40k</div>
                             </div>
                             </Link>
-                           
+
 
                         </div>
                     </div>
@@ -171,49 +171,26 @@ function Profile() {
                                 </button>
                                 </Link>
                             </div>
-                            <div id="self-posts" className="grid grid-cols-1 md:grid-cols-3 gap-3">  
+                            <div id="self-posts" className="grid grid-cols-1 md:grid-cols-3 gap-3">
                             <CardItem
-                              src='images/img-9.jpg'
-                              text='Stuffed with Alexandrian cromb'
-                              label='Egypt'
-                              path='/dish'
+                              src='images/OreoCheesecakeBars.jpg'
+                              dishName='Oreo Cheesecake Bars'
+                              text='Easy to make and are the perfect treat for lots of people'
+                              label='Dessert'
+                              path='/dishOreos'
                               pathEdit='/editRecipe'
                             />
-                            <CardItem
-                              src='images/img-9.jpg'
-                              text='Stuffed with Alexandrian cromb'
-                              label='Egypt'
-                              path='/dish'
-                              pathEdit='/editRecipe'
-                            />
-                            <CardItem
-                              src='images/img-9.jpg'
-                              text='Stuffed with Alexandrian cromb'
-                              label='Egypt'
-                              path='/dish'
-                              pathEdit='/editRecipe'
-                            />
-                            <CardItem
-                              src='images/img-9.jpg'
-                              text='Stuffed with Alexandrian cromb'
-                              label='Egypt'
-                              path='/dish'
-                              pathEdit='/editRecipe'
-                            />
+
                             </div>
                         </div>
-                        
+
                     </div>
                     {/* <!-- End of recipes --> */}
-                
-                
-                
+
                 </div>
-                
-          
+
             </div>
-            
-            
+
         </div>
     </div>
 
